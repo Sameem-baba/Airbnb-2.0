@@ -3,6 +3,7 @@ import { useRouter } from "next/dist/client/router";
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import InfoCard from "../components/InfoCard";
+import Head from "next/head";
 
 function Search({ searchResults }) {
     const router = useRouter();
@@ -19,6 +20,10 @@ function Search({ searchResults }) {
 
     return (
         <div className="bg-[#878683]">
+            <Head>
+                <title>{`Search Results - ${location}`}</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <Header placeholder={`${location} | ${range} | ${noOfGuests}`}/>
 
             <main className="flex">
