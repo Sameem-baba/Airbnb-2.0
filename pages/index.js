@@ -17,8 +17,9 @@ export default function Home({ exploreData, cardsData }) {
       {/* Header */}
       <Header />
 
-      {/* Banner */}
-      <Banner />
+        {/* Banner */}
+        <Banner />
+      
 
       {/* Main */}
       <main className="max-w-7xl mx-auto px-8 sm:px-16 ">

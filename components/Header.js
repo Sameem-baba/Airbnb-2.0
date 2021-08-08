@@ -6,7 +6,7 @@ import {
     UserCircleIcon,
     UsersIcon,
 } from "@heroicons/react/solid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DateRangePicker } from 'react-date-range';
@@ -14,11 +14,24 @@ import { useRouter } from "next/dist/client/router";
 
 function Header({ placeholder }) {
     const [searchInput, setSearchInput] = useState('');
+    const [show, handleShow] = useState(false);
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [noOfGuests, setNoOfGuests] = useState(1);
     const router = useRouter();
 
+    const transitionNavBar = () => {
+        if(window.scrollY > 100) {
+            handleShow(true);
+        } else {
+            handleShow(false);
+        }
+    }
+
+    useEffect(()=> {
+        window.addEventListener("scroll", transitionNavBar);
+        return () => window.removeEventListener("scroll", transitionNavBar);
+    }, [])
 
     const selectionRange = {
         startDate: startDate,
@@ -48,8 +61,8 @@ function Header({ placeholder }) {
     }
 
     return (
-        <header className="sticky top-0 z-50 grid
-        grid-cols-3 bg-[#444444] shadow-md p-5 md:px-10">
+        <header className={`sticky top-0 z-50 grid rounded-full
+        grid-cols-3 bg-[#494742] shadow-md p-5 md:px-10 ${show && "bg-[#111]"}`}>
             {/* Left */}
             <div
                 onClick={() => router.push('/')}
